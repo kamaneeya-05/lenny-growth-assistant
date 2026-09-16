@@ -1,0 +1,133 @@
+{
+  "total_chunks": 660,
+  "total_sources": 14,
+  "vocab_size": 16000,
+  "sources": [
+    {
+      "title": "A guide to AI prototyping for product managers",
+      "guest": null,
+      "type": "newsletter",
+      "url": "https://www.lennysnewsletter.com/p/a-guide-to-ai-prototyping-for-product-managers",
+      "word_count": 4449,
+      "chunks": 1,
+      "filename": "a-guide-to-ai-prototyping-for-product-managers.md"
+    },
+    {
+      "title": "Adam Mosseri: AI is a tailwind for authenticity",
+      "guest": "Adam Mosseri",
+      "type": "podcast",
+      "url": "https://www.lennysnewsletter.com/p/adam-mosseri-ai-is-a-tailwind-for",
+      "word_count": 12640,
+      "chunks": 44,
+      "filename": "adam-mosseri.md"
+    },
+    {
+      "title": "Beyond vibe checks: A PM’s complete guide to evals",
+      "guest": null,
+      "type": "newsletter",
+      "url": "https://www.lennysnewsletter.com/p/beyond-vibe-checks-a-pms-complete-guide-to-evals",
+      "word_count": 3558,
+      "chunks": 1,
+      "filename": "beyond-vibe-checks-a-pms-complete-guide-to-evals.md"
+    },
+    {
+      "title": "From skeptic to true believer: How OpenClaw changed my life | Claire Vo",
+      "guest": "Claire Vo",
+      "type": "podcast",
+      "url": null,
+      "word_count": 20081,
+      "chunks": 74,
+      "filename": "claire-vo-openclaw.md"
+    },
+    {
+      "title": "Elena Verna 4.0",
+      "guest": "Elena Verna 4.0",
+      "type": "podcast",
+      "url": null,
+      "word_count": 17618,
+      "chunks": 62,
+      "filename": "elena-verna-40.md"
+    },
+    {
+      "title": "How to build a company that withstands any era | Eric Ries, Lean Startup author",
+      "guest": "Eric Ries, Lean Startup author",
+      "type": "podcast",
+      "url": "https://www.lennysnewsletter.com/p/how-to-build-a-company-that-withstands",
+      "word_count": 20428,
+      "chunks": 73,
+      "filename": "eric-ries-2.md"
+    },
+    {
+      "title": "Slack founder: Mental models for building products people love ft. Stewart Butterfield",
+      "guest": "Stewart Butterfield",
+      "type": "podcast",
+      "url": null,
+      "word_count": 16319,
+      "chunks": 58,
+      "filename": "stewart-butterfield.md"
+    },
+    {
+      "title": "Essential reading for product builders—part 1",
+      "guest": null,
+      "type": "newsletter",
+      "url": "https://www.lennysnewsletter.com/p/essential-reading-for-product-builders-part-1",
+      "word_count": 2850,
+      "chunks": 1,
+      "filename": "essential-reading-for-product-builders-part-1.md"
+    },
+    {
+      "title": "Everyone should be using Claude Code more",
+      "guest": null,
+      "type": "newsletter",
+      "url": "https://www.lennysnewsletter.com/p/everyone-should-be-using-claude-code",
+      "word_count": 4514,
+      "chunks": 1,
+      "filename": "everyone-should-be-using-claude-code-more.md"
+    },
+    {
+      "title": "Hard truths about building in the AI era | Keith Rabois (Khosla Ventures)",
+      "guest": "Keith Rabois",
+      "type": "podcast",
+      "url": null,
+      "word_count": 15807,
+      "chunks": 52,
+      "filename": "keith-rabois.md"
+    },
+    {
+      "title": "Marc Andreessen: The real AI boom hasn’t even started yet",
+      "guest": "Marc Andreessen",
+      "type": "podcast",
+      "url": null,
+      "word_count": 23012,
+      "chunks": 81,
+      "filename": "marc-andreessen.md"
+    },
+    {
+      "title": "The high-growth handbook: Molly Graham’s frameworks for leading through chaos, change, and scale",
+      "guest": "Molly Graham",
+      "type": "podcast",
+      "url": null,
+      "word_count": 17984,
+      "chunks": 67,
+      "filename": "molly-graham.md"
+    },
+    {
+      "title": "An AI state of the union: We’ve passed the inflection point, dark factories are coming, and automation timelines | Simon Willison",
+      "guest": "Simon Willison",
+      "type": "podcast",
+      "url": null,
+      "word_count": 21276,
+      "chunks": 78,
+      "filename": "simon-willison.md"
+    },
+    {
+      "title": "Father of the iPod and iPhone on building taste, judgment, and creativity in the AI era | Tony Fadell",
+      "guest": "Tony Fadell",
+      "type": "podcast",
+      "url": "https://www.lennysnewsletter.com/p/father-of-the-ipod-and-iphone-on",
+      "word_count": 18180,
+      "chunks": 67,
+      "filename": "tony-fadell.md"
+    }
+  ]
+}
