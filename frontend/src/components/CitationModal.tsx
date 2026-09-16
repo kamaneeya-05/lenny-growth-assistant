@@ -47,7 +47,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
               </span>
               <span className="text-xs text-emerald-400 flex items-center gap-1 font-mono font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                {Math.round(citation.relevance_score * 100)}% Verified Match
+                {Math.round(citation.relevance_score * 100)}% Relevance Score
               </span>
             </div>
             <h3 className="text-base font-bold text-white leading-snug">
@@ -63,12 +63,12 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
           </button>
         </div>
 
-        {/* Podcast Audio Simulation Bar */}
+        {/* Podcast Timeline & Timestamp Scrubber */}
         <div className="px-6 py-4 bg-indigo-950/30 border-b border-indigo-900/30 flex items-center gap-4">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
             className="w-10 h-10 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-600/30 transition-all shrink-0 active:scale-95"
-            title={isPlaying ? 'Pause Segment' : 'Play Segment'}
+            title={isPlaying ? 'Pause Scrubber' : 'Play Scrubber Timeline'}
           >
             {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
           </button>
@@ -77,7 +77,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
             <div className="flex items-center justify-between text-[11px] text-slate-300 font-medium">
               <span className="flex items-center gap-1.5">
                 <Volume2 className="w-3.5 h-3.5 text-indigo-400" />
-                Audio Passage Segment
+                Episode Timeline Marker
               </span>
               <span className="font-mono text-indigo-300">
                 {citation.timestamp_str || '00:00:00'}

@@ -56,10 +56,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <h1 className="text-xs font-bold text-white tracking-tight flex items-center gap-1.5">
                 Lenny Assistant
                 <span className="text-[9px] uppercase font-bold px-1.5 py-0.2 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  AI PRO
+                  FDE Edition
                 </span>
               </h1>
-              <p className="text-[11px] text-slate-400 font-medium">Growth & Product Engine</p>
+              <p className="text-[11px] text-slate-400 font-medium">Growth & Product Knowledge Engine</p>
             </div>
           </div>
         </div>

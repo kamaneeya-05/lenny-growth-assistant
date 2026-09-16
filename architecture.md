@@ -52,10 +52,10 @@ The Lenny Growth Assistant is built as a modular client-server application optim
                               INGESTION WORKFLOW
                   (scripts/ingest_transcripts.py / API)
                                        |
-                    +------------------------------------+
-                    |  Lenny Transcript Public Repo      |
-                    |  (50 Podcasts + 10 Newsletters)    |
-                    +------------------------------------+
+                    +---------------------------------------------+
+                    |  Lenny Transcript Archive                   |
+                    |  (14 Pre-seeded Transcripts + CLI Pipeline) |
+                    +---------------------------------------------+
 ```
 
 ---
@@ -64,8 +64,8 @@ The Lenny Growth Assistant is built as a modular client-server application optim
 
 ### 2.1 Backend Core
 - **`app/core/config.py`**: Centralized Pydantic `BaseSettings` object managing environment variables, model defaults, database connection strings, and search thresholds.
-- **`app/db/`**: SQLAlchemy 2.0 declarative models, asynchronous/synchronous session engine factory supporting native SQLite for instant execution and PostgreSQL for containerized deployments.
-- **`app/services/vector_store.py`**: Hybrid vector store maintaining in-memory / persistent vector index (using TF-IDF / sentence embeddings and cosine similarity) alongside an inverted token index for exact keyword matching (guests, companies, frameworks).
+- **`app/db/`**: SQLAlchemy 2.0 declarative models supporting native SQLite by default for zero-dependency execution and PostgreSQL via `DATABASE_URL` for containerized deployments.
+- **`app/services/vector_store.py`**: Persistent hybrid vector store combining sublinear TF-IDF n-gram vectors and cosine similarity with keyword boosting over chunk metadata.
 - **`app/services/ingestion.py`**: Pipeline parsing markdown files with YAML frontmatter, splitting speeches by speaker markers (`**Speaker** (HH:MM:SS)`), producing 350-500 word overlapping chunks with metadata preservation.
 - **`app/services/llm/`**: Model provider layer exposing a unified `complete(messages, system_prompt, temperature)` interface across Ollama, Cloud, and Mock engines.
 - **`app/services/agent/`**: The core domain orchestrator:

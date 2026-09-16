@@ -50,7 +50,7 @@ Product Managers (PMs), Growth Practitioners, Founders, and Strategy Operators w
 
 ## 3. Assumptions & Environment Constraints
 
-1. **Transcript Source:** Ingested from the official free public starter pack (`LennysNewsletter/lennys-newsletterpodcastdata`), featuring 50 podcast episodes and 10 newsletters.
+1. **Transcript Source:** Ingested from the official free public starter pack (`LennysNewsletter/lennys-newsletterpodcastdata`), featuring 14 pre-seeded core episodes and newsletters (660 chunks) with CLI ingestion pipeline for downloading additional transcripts.
 2. **Local Machine Hardware:** Evaluators may run on machines without active Docker daemons or dedicated GPUs. Therefore, direct native execution (SQLite + Python 3.11 + Node Vite) must be the primary zero-friction path.
 3. **Ollama Availability:** Evaluators may or may not have Ollama installed or running. The system must probe `http://localhost:11434`, report live status in the UI, and provide a deterministic test/mock provider fallback so the UI never breaks.
 4. **Security & Artifacts:** Generated HTML is untrusted user-prompted code. It must render in a sandboxed iframe with strict Content Security Policy (`sandbox="allow-scripts"` without `allow-same-origin`) to prevent session hijack or parent DOM access.
