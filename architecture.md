@@ -190,9 +190,15 @@ class BaseLLMProvider(ABC):
         pass
 ```
 
-1. **Ollama Provider:** Queries `POST http://localhost:11434/api/chat` with timeout protection (30s) and probes `GET http://localhost:11434/api/tags` to verify installed models (e.g. `llama3.2`, `mistral`, `phi3`).
-2. **Cloud Provider:** Sends standard requests to Anthropic Claude (`/v1/messages`) or OpenAI (`/v1/chat/completions`) using the configured environment variables (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`).
-3. **Mock / Evaluation Provider:** Deterministic offline generator that parses retrieved transcript chunks and produces complete, citation-backed answers, Ship 30 essays, and HTML artifacts without requiring external servers or credentials.
+1. **Ollama Provider (`OllamaProvider`):**
+   - Queries `POST http://localhost:11434/api/chat` with timeout protection (45s) and health-probes `GET http://localhost:11434/api/tags` to discover locally pulled weights (`llama3.2:latest`, `mistral`).
+   - Supports secondary-drive installations (e.g. Windows NTFS Directory Junctions `mklink /J C:\Users\<Username>\.ollama E:\ollama_models` or `OLLAMA_MODELS=E:\ollama_models`) to avoid C: drive disk space constraints.
+2. **Cloud Provider (`CloudLLMProvider`):**
+   - High-Speed Cloud Inference: Routes via OpenAI-compatible endpoints including Groq Cloud (`qwen/qwen3.8-27b`).
+   - **Claude-to-Groq Fallback Bridge**: If Anthropic Claude is requested but `ANTHROPIC_API_KEY` is not present, `ProviderFactory` transparently bridges the request to the active Groq Cloud tier. The UI honestly reports this as `Claude 3.5 Sonnet (Groq Fallback)` without falsifying model provenance.
+   - **Exponential Backoff & Rate-Limit Resilience**: Incorporates automatic retry upon encountering HTTP 429 rate limits, with downstream skill fallbacks to the deterministic synthesizer if API quotas are temporarily exhausted.
+3. **Mock / Evaluation Provider (`MockEvaluationProvider`):**
+   - Deterministic offline generator that parses retrieved transcript chunks and produces complete, citation-backed answers, Ship 30 essays, and HTML artifacts without requiring external servers or credentials. Ensures zero runtime crashes during offline evaluations.
 
 ---
 

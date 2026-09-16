@@ -58,9 +58,9 @@ Typography:
 |                   |  - Analytical Synthesis                   | - Markdown preview      |
 | ----------------- |  - [Citation: Mosseri (00:01:23)]         |                         |
 | Knowledge Base:   |                                           |                         |
-|  - 50 Podcasts    | Composer:                                 |                         |
-|  - 10 Newsletters |  [ Ask a growth question...       [Send] ]|                         |
-| Model: Ollama     |                                           |                         |
+|  - 14 Transcripts | Composer:                                 |                         |
+|  - 660 Chunks     |  [ Ask a growth question...       [Send] ]|                         |
+| Model: Ollama/Groq|                                           |                         |
 +-------------------+-------------------------------------------+-------------------------+
 ```
 

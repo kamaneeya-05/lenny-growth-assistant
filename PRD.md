@@ -29,7 +29,7 @@ Product Managers (PMs), Growth Practitioners, Founders, and Strategy Operators w
   - **Ship 30 for 30 Essayist:** Produces ~1,250-word atomic essays featuring the 1-3-1 rhythm, hook (Pain/Promise/Proof/Path), skimmable subheadings, and actionable takeaways.
   - **Artifact Generator:** Creates production-ready Markdown documents and sandboxed HTML/CSS deliverables (strategy one-pagers, growth loops, comparison tables).
 - **In-App Artifact Viewer:** Interactive side-by-side preview with secure iframe sandboxing, raw code inspection, and one-click copy.
-- **Flexible Model Selection:** Runs locally on Ollama (no cloud API keys required for local demos) and supports cloud providers (Anthropic Claude, OpenAI).
+- **Flexible Model Selection:** Runs locally on Ollama (`llama3.2`), high-speed cloud inference via Groq (`qwen/qwen3.8-27b`), Anthropic Claude with graceful Groq fallback, and zero-dependency offline evaluator.
 
 ---
 
