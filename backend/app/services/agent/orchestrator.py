@@ -5,8 +5,11 @@ Handles intent classification, hybrid retrieval, grounding verification, and ski
 
 import time
 import re
+import logging
 from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass, field
+
+logger = logging.getLogger(__name__)
 
 from backend.app.core.config import settings
 from backend.app.schemas.chat import CitationItem

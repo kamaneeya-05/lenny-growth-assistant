@@ -156,10 +156,11 @@ class CloudLLMProvider(BaseLLMProvider):
             content = choice["message"].get("content") or ""
             tokens = data.get("usage", {}).get("total_tokens", 0)
 
+            provider_label = "groq" if "groq" in self.base_url else "openai"
             return LLMResponse(
                 content=content,
                 model_name=model,
-                provider="openai",
+                provider=provider_label,
                 finish_reason=choice.get("finish_reason", "stop"),
                 total_tokens=tokens,
             )

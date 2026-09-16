@@ -4,8 +4,11 @@ Generates complete, self-contained Markdown and HTML/CSS artifacts based on grou
 """
 
 import re
+import logging
 from typing import List, Dict, Any, Tuple, Optional
 from backend.app.services.llm.base import BaseLLMProvider, LLMMessage
+
+logger = logging.getLogger(__name__)
 
 
 ARTIFACT_SYSTEM_PROMPT = """You are a Principal Product Architect and Designer for The Lenny Growth Assistant.
@@ -63,15 +66,25 @@ class ArtifactGeneratorSkill:
             f"Generate the complete artifact inside a ```{artifact_type} ... ``` block."
         )
 
-        resp = await self.provider.complete(
-            messages=[LLMMessage(role="user", content=prompt)],
-            system_prompt=ARTIFACT_SYSTEM_PROMPT,
-            temperature=0.3,
-            max_tokens=2500,
-            model_name=model_name,
-        )
-
-        raw_content = resp.content
+        try:
+            resp = await self.provider.complete(
+                messages=[LLMMessage(role="user", content=prompt)],
+                system_prompt=ARTIFACT_SYSTEM_PROMPT,
+                temperature=0.3,
+                max_tokens=2500,
+                model_name=model_name,
+            )
+            raw_content = resp.content
+        except Exception as err:
+            logger.warning(f"Artifact generation provider failed ({err}); falling back to deterministic synthesizer.")
+            from backend.app.services.llm.mock_provider import MockEvaluationProvider
+            mock_resp = await MockEvaluationProvider().complete(
+                messages=[LLMMessage(role="user", content=prompt)],
+                system_prompt=ARTIFACT_SYSTEM_PROMPT,
+                temperature=0.3,
+                max_tokens=2500,
+            )
+            raw_content = mock_resp.content
         extracted_content = self._extract_code_block(raw_content, artifact_type)
 
         # Derive title

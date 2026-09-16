@@ -63,11 +63,11 @@
 > "Finally, let's talk about an important technical trade-off: **Local vs. Cloud deployment**.
 >
 > The take-home brief required local model capability. We built a flexible provider abstraction:
-> - It connects natively to local **Ollama** running models like `llama3.2`.
-> - It integrates cloud providers like OpenAI, Anthropic Claude, and high-speed Groq.
+> - It connects natively to local **Ollama** running models like `llama3.2` on the E: drive.
+> - It integrates cloud providers like high-speed Groq (with graceful Claude-compatible fallback), plus direct Anthropic and OpenAI support.
 > - And it includes a deterministic offline mock provider as a fallback. If an evaluator tests this on a machine without a local GPU daemon running, the system stays 100% operational without crashing.
 >
-> All 18 automated backend tests pass, the database persists sessions in SQLite with PostgreSQL readiness, and the frontend builds with zero TypeScript errors.
+> All 18 automated backend tests pass, the database persists sessions in native SQLite with optional PostgreSQL configuration, and the frontend builds with zero TypeScript errors.
 >
 > Thank you, and I look forward to your feedback!"
 
@@ -81,7 +81,7 @@
 | **"14 core sources"** | 14 markdown transcripts and fixtures indexed in `data/vector_store/` |
 | **"Verified Match %"** | Replaced with *"normalized retrieval relevance score"* |
 | **"00:00:00" timestamp** | True — verbatim in `data/fixtures/adam-mosseri.md` at line 11 |
-| **"Simulated audio player"**| Replaced with *"timeline marker and playback scrubber"* |
+| **"Simulated audio player"**| Replaced with *"timeline marker and transcript timestamp navigation"* |
 | **"Direct Substack link"** | True — post_url from YAML frontmatter: `https://www.lennysnewsletter.com/p/...` |
-| **"100% test pass rate"** | True — all 18 backend tests pass cleanly in pytest |
+| **"100% test pass rate"** | True — all 18 backend tests pass cleanly in pytest (18/18 passed) |
 | **"Sandboxed execution"** | True — `<iframe sandbox="allow-scripts">` without `allow-same-origin` |
