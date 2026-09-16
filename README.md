@@ -1,6 +1,6 @@
 # The Lenny Growth Assistant
 
-An enterprise-grade, full-stack AI conversational product and growth advisor strictly grounded in the official archive of **Lenny's Podcast** and **Lenny's Newsletter** transcripts.
+Full-stack AI conversational growth assistant grounded in Lenny’s Podcast transcripts. Features strict source grounding, multi-model support (Ollama & Cloud), Ship 30 for 30 essay generation, and an in-app sandboxed Artifact Studio.
 
 Built for Product Managers, Growth Leads, Founders, and Strategy Operators who want battle-tested frameworks, verified transcript citations, high-impact **~1,250-word Ship 30 for 30 essays**, and interactive **HTML/Markdown artifacts** previewed inside a sandboxed studio.
 

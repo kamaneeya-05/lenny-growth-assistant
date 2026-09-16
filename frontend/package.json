@@ -2,6 +2,7 @@
   "name": "lenny-growth-assistant-frontend",
   "private": true,
   "version": "1.0.0",
+  "description": "Full-stack AI conversational growth assistant grounded in Lenny’s Podcast transcripts. Features strict source grounding, multi-model support (Ollama & Cloud), Ship 30 for 30 essay generation, and an in-app sandboxed Artifact Studio.",
   "type": "module",
   "scripts": {
     "dev": "vite",
