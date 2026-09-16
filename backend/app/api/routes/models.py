@@ -46,13 +46,21 @@ async def list_available_models():
             description="Anthropic Claude 3.5 Sonnet",
         ),
         ModelInfo(
-            id="openai:gpt-4o-mini",
-            name="GPT-4o Mini",
+            id=f"openai:{settings.DEFAULT_MODEL_NAME if settings.DEFAULT_MODEL_PROVIDER == 'openai' else 'gpt-4o-mini'}",
+            name=(
+                f"Groq ({settings.DEFAULT_MODEL_NAME})" if "groq.com" in settings.OPENAI_BASE_URL
+                else f"xAI Grok ({settings.DEFAULT_MODEL_NAME})" if "x.ai" in settings.OPENAI_BASE_URL
+                else f"OpenAI ({settings.DEFAULT_MODEL_NAME or 'GPT-4o Mini'})"
+            ),
             provider="openai",
             is_local=False,
             is_available=statuses["openai"]["available"],
             context_length=128000,
-            description="OpenAI GPT-4o Mini",
+            description=(
+                f"Groq ultra-fast cloud inference ({settings.DEFAULT_MODEL_NAME})" if "groq.com" in settings.OPENAI_BASE_URL
+                else f"xAI Grok cloud inference ({settings.DEFAULT_MODEL_NAME})" if "x.ai" in settings.OPENAI_BASE_URL
+                else "OpenAI cloud inference model"
+            ),
         ),
         # Offline Deterministic Mock
         ModelInfo(
