@@ -17,7 +17,7 @@ class ProviderFactory:
     def __init__(self):
         self.ollama = OllamaProvider(
             base_url=settings.OLLAMA_BASE_URL,
-            default_model=settings.DEFAULT_MODEL_NAME,
+            default_model=settings.DEFAULT_MODEL_NAME if settings.DEFAULT_MODEL_PROVIDER == "ollama" else "llama3.2",
             timeout=settings.OLLAMA_TIMEOUT_SECONDS,
         )
         self.anthropic = CloudLLMProvider(
@@ -33,27 +33,33 @@ class ProviderFactory:
         self.mock = MockEvaluationProvider()
 
     async def get_provider(self, provider_name: Optional[str] = None) -> BaseLLMProvider:
-        """Resolve requested provider with graceful fallback."""
+        """Resolve requested provider with graceful fallback and cross-provider bridging."""
         target = (provider_name or settings.DEFAULT_MODEL_PROVIDER).lower()
 
         if target == "ollama":
             status = await self.ollama.check_health()
             if status.is_available:
                 return self.ollama
-            # Graceful fallback: If Ollama requested but unavailable, fallback to mock provider
             print(f"[!] Ollama is not responding at {settings.OLLAMA_BASE_URL}. Falling back to deterministic demo/mock provider.")
             return self.mock
 
-        elif target == "anthropic":
+        elif target in ("anthropic", "claude"):
             status = await self.anthropic.check_health()
             if status.is_available:
                 return self.anthropic
+            # Intelligent Claude -> Groq / Grok Cloud Bridge
+            openai_status = await self.openai.check_health()
+            if openai_status.is_available:
+                print(f"[*] Anthropic key not configured. Gracefully bridging Claude request to Groq Cloud ({self.openai.default_model}).")
+                return self.openai
+            print("[!] Anthropic and cloud providers unavailable. Falling back to mock evaluator.")
             return self.mock
 
-        elif target == "openai":
+        elif target in ("openai", "groq", "grok"):
             status = await self.openai.check_health()
             if status.is_available:
                 return self.openai
+            print("[!] Groq/OpenAI provider unavailable. Falling back to mock evaluator.")
             return self.mock
 
         elif target == "mock":

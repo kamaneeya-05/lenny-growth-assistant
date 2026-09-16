@@ -1,8 +1,4 @@
-"""
-Cloud LLM Provider for Anthropic Claude and OpenAI.
-Safe handling of missing API keys, graceful timeouts, and error reporting.
-"""
-
+import asyncio
 from typing import List, Optional
 import httpx
 from backend.app.services.llm.base import BaseLLMProvider, LLMMessage, LLMResponse, ProviderStatus
@@ -65,6 +61,9 @@ class CloudLLMProvider(BaseLLMProvider):
         if self.provider_type == "anthropic":
             return await self._call_anthropic(messages, system_prompt, temperature, max_tokens, model)
         else:
+            # If a Claude model is requested through the Groq/OpenAI provider, map to the active cloud model
+            if model and ("claude" in model.lower() or "anthropic" in model.lower()):
+                model = self.default_model
             return await self._call_openai(messages, system_prompt, temperature, max_tokens, model)
 
     async def _call_anthropic(
@@ -127,6 +126,7 @@ class CloudLLMProvider(BaseLLMProvider):
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) LennyGrowthAssistant/1.0",
         }
 
         openai_messages = []
@@ -144,12 +144,16 @@ class CloudLLMProvider(BaseLLMProvider):
 
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             resp = await client.post(f"{self.base_url}/chat/completions", headers=headers, json=payload)
+            if resp.status_code == 429:
+                await asyncio.sleep(2.5)
+                resp = await client.post(f"{self.base_url}/chat/completions", headers=headers, json=payload)
+
             if resp.status_code != 200:
-                raise RuntimeError(f"OpenAI API error ({resp.status_code}): {resp.text}")
+                raise RuntimeError(f"OpenAI/Groq API error ({resp.status_code}): {resp.text}")
 
             data = resp.json()
             choice = data["choices"][0]
-            content = choice["message"]["content"]
+            content = choice["message"].get("content") or ""
             tokens = data.get("usage", {}).get("total_tokens", 0)
 
             return LLMResponse(

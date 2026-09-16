@@ -268,11 +268,22 @@ class AgentOrchestrator:
             active_messages.append(LLMMessage(role=m.role, content=m.content))
         active_messages.append(LLMMessage(role="user", content=user_message))
 
-        resp = await self.provider.complete(
-            messages=active_messages,
-            system_prompt=system_instruction,
-            temperature=0.3,
-            max_tokens=2000,
-            model_name=model_name,
-        )
-        return resp.content
+        try:
+            resp = await self.provider.complete(
+                messages=active_messages,
+                system_prompt=system_instruction,
+                temperature=0.3,
+                max_tokens=2000,
+                model_name=model_name,
+            )
+            return resp.content
+        except Exception as err:
+            logger.warning(f"Provider {self.provider} error ({err}), falling back to deterministic synthesizer.")
+            from backend.app.services.llm.mock_provider import MockEvaluationProvider
+            mock_resp = await MockEvaluationProvider().complete(
+                messages=active_messages,
+                system_prompt=system_instruction,
+                temperature=0.3,
+                max_tokens=2000,
+            )
+            return mock_resp.content

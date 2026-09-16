@@ -38,17 +38,20 @@ async def list_available_models():
         # Cloud providers
         ModelInfo(
             id="anthropic:claude-3-5-sonnet-20241022",
-            name="Claude 3.5 Sonnet",
+            name="Claude 3.5 Sonnet" if statuses["anthropic"]["available"] else "Claude 3.5 Sonnet (Groq Bridge)",
             provider="anthropic",
             is_local=False,
-            is_available=statuses["anthropic"]["available"],
-            context_length=200000,
-            description="Anthropic Claude 3.5 Sonnet",
+            is_available=statuses["anthropic"]["available"] or statuses["openai"]["available"],
+            context_length=200000 if statuses["anthropic"]["available"] else 128000,
+            description=(
+                "Anthropic Claude 3.5 Sonnet" if statuses["anthropic"]["available"]
+                else "Claude 3.5 Sonnet (Bridged to Groq Cloud inference)"
+            ),
         ),
         ModelInfo(
-            id=f"openai:{settings.DEFAULT_MODEL_NAME if settings.DEFAULT_MODEL_PROVIDER == 'openai' else 'gpt-4o-mini'}",
+            id=f"openai:{settings.DEFAULT_MODEL_NAME if settings.DEFAULT_MODEL_PROVIDER == 'openai' else 'groq/compound'}",
             name=(
-                f"Groq ({settings.DEFAULT_MODEL_NAME})" if "groq.com" in settings.OPENAI_BASE_URL
+                f"Groq Cloud ({settings.DEFAULT_MODEL_NAME})" if "groq.com" in settings.OPENAI_BASE_URL
                 else f"xAI Grok ({settings.DEFAULT_MODEL_NAME})" if "x.ai" in settings.OPENAI_BASE_URL
                 else f"OpenAI ({settings.DEFAULT_MODEL_NAME or 'GPT-4o Mini'})"
             ),

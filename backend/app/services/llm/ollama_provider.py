@@ -52,6 +52,8 @@ class OllamaProvider(BaseLLMProvider):
     ) -> LLMResponse:
         """Query Ollama chat API."""
         model = model_name or self.default_model
+        if model and ("/" in model or "claude" in model.lower() or "gpt" in model.lower()):
+            model = self.default_model
 
         # Build Ollama message payload
         formatted_messages = []
