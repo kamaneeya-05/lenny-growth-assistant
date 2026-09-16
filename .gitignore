@@ -57,3 +57,6 @@ data/cache/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Candidate Personal Notes
+demo_video_script.md
