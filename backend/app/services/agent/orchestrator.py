@@ -181,13 +181,14 @@ class AgentOrchestrator:
         return any(
             k in lower
             for k in [
-                "create an artifact",
-                "generate an artifact",
+                "artifact",
                 "landing page",
                 "one-pager",
                 "one pager",
                 "in html",
                 "html artifact",
+                "markdown artifact",
+                "markdown checklist",
                 "visual framework",
                 "dashboard mockup",
                 "strategy doc in html",
@@ -206,8 +207,8 @@ class AgentOrchestrator:
         meta_phrases = [
             r"\bturn (that|this|it) into an?\b",
             r"\binto an? (ship 30 for 30|ship 30|atomic)?\s*essay\b",
-            r"\b(write|generate|create) an? (ship 30 for 30|ship 30|atomic)?\s*essay (on|about)?\b",
-            r"\b(create|generate) an? (html|markdown)?\s*artifact (for|of|about)?\b",
+            r"\b(write|generate|create)\s+(an?|the)?\s*(ship 30 for 30|ship 30|atomic)?\s*essay (on|about)?\b",
+            r"\b(create|generate)\s+(an?|the)?\s*(html|markdown|interactive)?\s*(artifact|checklist|one-pager|one pager|framework|doc|\s+)*\s*(for|of|about)?\b",
             r"\bship 30 for 30 essay\b",
             r"\bship 30 essay\b",
             r"\bship 30 for 30\b",
